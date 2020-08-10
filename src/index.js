@@ -8,10 +8,15 @@ import './index.css';
 
 console.log(store.getState());
 
-ReactDOM.render(
-    <App
-      stories={getReadableStories(store.getState())}
-      onArchive={id => store.dispatch({ type: STORY_ARCHIVE, id })}
-    />,
-  document.getElementById('root')
-);
+const render = () => {
+  ReactDOM.render(
+      <App
+        stories={getReadableStories(store.getState())}
+        onArchive={id => store.dispatch({ type: STORY_ARCHIVE, id })}
+      />,
+    document.getElementById('root')
+  );
+}
+
+store.subscribe(render);
+render();

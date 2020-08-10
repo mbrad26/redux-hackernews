@@ -54,7 +54,7 @@ const SearchStories = ({ onFetchStories }) => {
       setQuery('');
     }
 
-    event.prevenDefault();
+    event.preventDefault();
   }
 
   const onChange = event => {

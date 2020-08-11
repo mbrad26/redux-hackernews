@@ -1,0 +1,35 @@
+import { getReadableStories, getFetchError } from './story';
+
+describe('story selector', () => {
+  it('retrieves readable stories', () => {
+    const storyState = {
+      error: null,
+      stories: [
+        { objectID: '1', title: 'foo' },
+        { objectID: '2', title: 'bar' },
+      ],
+    };
+    const archiveState = ['1'];
+    const state = { storyState, archiveState }
+
+    const expectedReadableStories = [{ objectID: '2', title: 'bar' }];
+    const readableStories = getReadableStories(state);
+
+    expect(readableStories).toEqual(expectedReadableStories);
+  });
+
+  it('retrieves the error', () => {
+    const storyState = {
+      error: 'error',
+      stories: [
+        { objectID: '1', title: 'foo' },
+        { objectID: '2', title: 'bar' },
+      ],
+    };
+    const state = { storyState }
+
+    const error = getFetchError(state);
+
+    expect(error).toEqual('error');
+  });
+});
